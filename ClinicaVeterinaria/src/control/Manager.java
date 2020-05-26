@@ -91,6 +91,37 @@ public class Manager {
 		
 		return articulos;
 	}
+
+	public Mascota getMascota(String dniPropietario, String nombre) throws Exception {
+		DBManager dbManager = new DBManager();
+		
+		Mascota mascota = dbManager.getMascota(dniPropietario, nombre);
+		
+		return mascota;
+	}
+
+	public void editarDatosMascota(Mascota m) throws Exception{
+		DBManager dbManager = new DBManager();
+		
+		dbManager.editarDatosMascota(m);
+		
+	}
+
+	public void borrarMascota(String dniPropietario, String nombre) throws Exception{
+		
+		DBManager dbManager = new DBManager();
+		
+		dbManager.borrarMascota(dniPropietario, nombre);
+		
+	}
+
+	public void borrarCliente(String dni) throws Exception{
+		
+		DBManager dbManager = new DBManager();
+		
+		dbManager.borrarCliente(dni);
+		
+	}
 	
 	
 }

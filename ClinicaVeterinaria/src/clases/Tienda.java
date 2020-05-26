@@ -1,7 +1,5 @@
 package clases;
 
-import java.awt.Image;
-
 public class Tienda {
 	private String codigo;
 	private String nombre;
@@ -9,7 +7,6 @@ public class Tienda {
 	private String animal;
 	private String tipo;
 	private float precioPVP;
-//	private Image foto;
 	private int almacenados;
 	
 	// methods setter & getter
@@ -50,12 +47,6 @@ public class Tienda {
 	public void setPrecio(float precio) {
 		this.precioPVP = precio;
 	}
-/*	public Image getFoto() {
-		return foto;
-	}
-	public void setFoto(Image finalImg) {
-		this.foto = finalImg;
-	}*/
 	public int getAlmacenados() {
 		return almacenados;
 	}

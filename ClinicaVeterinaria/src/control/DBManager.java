@@ -1,20 +1,11 @@
 package control;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 import clases.Cliente;
 import clases.Mascota;
 import clases.Personal;
@@ -246,8 +237,7 @@ public class DBManager {
 	public ArrayList<Tienda> getArticulosTienda(String animal) throws Exception{
 		ArrayList <Tienda> articulos = new ArrayList <Tienda>();
 		Tienda aux;
-	//	Image finalImg =null;
-	//	InputStream is =null;
+	
 		this.openConnection();
 		
 		String select = "select codigo, nombre, descripcion, animal, tipo, precio_PVP, almacenados from tienda where animal='"+animal+"'"; //se escribe la Select
@@ -260,13 +250,6 @@ public class DBManager {
 			aux.setDescripcion(rs.getString("descripcion"));
 			aux.setAnimal(rs.getString("animal"));
 			aux.setTipo(rs.getString("tipo"));
-			/*
-			is = rs.getBinaryStream("foto");
-		    
-		    // hay que convertir el array de bytes en un buffer para poder pasarlo a image 
-		    BufferedImage biFoto=ImageIO.read(is);
-		    finalImg = biFoto;
-		    aux.setFoto(finalImg);*/
 			aux.setPrecio(rs.getFloat("precio_PVP"));
 			aux.setAlmacenados(rs.getInt("almacenados"));
 			articulos.add(aux);
@@ -276,6 +259,70 @@ public class DBManager {
 		this.closeConnection();
 		
 		return articulos;
+	}
+
+	public Mascota getMascota(String dniPropietario, String nombre) throws Exception{
+		Mascota mascota = new Mascota ();
+		this.openConnection();
+		
+		String select = "select nombre, especie, raza, sexo, fechaNacimiento, castrado from mascotas where id='"+dniPropietario+"' and nombre='"+nombre+"';";
+		
+		ResultSet rs =stmt.executeQuery(select);
+		
+		while(rs.next()) {
+			mascota.setNombre(rs.getString("nombre"));
+			mascota.setEspecie(rs.getString("especie"));
+			mascota.setRaza(rs.getString("raza"));
+			mascota.setSexo(rs.getString("sexo"));
+			mascota.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+			mascota.setBlnCastrado(rs.getBoolean("castrado"));
+		}
+		
+		rs.close();
+		this.closeConnection();
+		
+		return mascota;
+	}
+
+	public void editarDatosMascota(Mascota m) throws Exception{
+		
+		this.openConnection();
+		
+		String update = "update mascotas set raza ='"+m.getRaza()+"', sexo = '"+m.getSexo()+"', fechaNacimiento = '"+m.getFechaNacimiento()+"', castrado = "+m.isBlnCastrado()+" where id ='"+m.getId()+"' and nombre = '"+m.getNombre()+"';";
+		
+		stmt.executeUpdate(update);
+		
+		this.closeConnection();
+		
+	}
+
+	public void borrarMascota(String dniPropietario, String nombre) throws Exception {
+		
+		this.openConnection();
+		
+		String update = "delete from mascotas where id= '"+dniPropietario+"' and nombre = '"+nombre+"';";
+		
+		stmt.executeUpdate(update);
+		
+		this.closeConnection();
+	}
+
+	public void borrarCliente(String dni) throws Exception{
+		
+		this.openConnection();
+		
+		//primero borramos las mascotas
+		String update = "delete from clientes where id= '"+dni+"';";
+		
+		stmt.executeUpdate(update);
+		
+		//después borramos al cliente
+		String update2 = "delete from clientes where dni= '"+dni+"' ;";
+		
+		stmt.executeUpdate(update2);
+		
+		this.closeConnection();
+		
 	}
 
 }

@@ -159,10 +159,10 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JTable tablaRegistroMascotas;
 	private JTextField textDniBuscar;
 	private JButton btnBuscar;
+	private JButton btnBuscarMascota;
 	private JLabel lblResultado;
 	private JButton btnEditarRegistro;
 	private JButton btnEliminarCliente;
-	private JTextPane textResultadoBusquedaMascota;
 	private JButton btnEditarRegistroMascota;
 	private JButton btnEliminarMascota;
 	private JLabel lblNombreBuscado;
@@ -178,6 +178,21 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JLabel lblTelefonosBuscados;
 	private JTextField textTelfBusc1;
 	private JTextField textTelfBusc2;
+	
+	//------------------------------------------
+	private JLabel lblNombreMascotaBuscada;
+	private JTextField textNombreMascotaB;
+	private JLabel lblEspecieBuscada;
+	private JTextField textEspecieBuscada;
+	private JLabel lblRazaBuscada;
+	private JTextField textRazaBuscada;
+	private JLabel lblSexoBuscado;
+	private JTextField textSexoBuscado;
+	private JLabel lblFechaBuscada;
+	private JTextField textFechaBuscada;
+	private JLabel lblbuscarDni;
+	private JLabel lblBuscarNombre;
+	private JCheckBox chckbxCastradoBuscado ;
 	
 	/**
 	 * Create the dialog.
@@ -220,8 +235,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 
 		//crearPanelPersonal(dniUsuario);
 		
-		//crearPanelRegistroClientes();
-		//crearPanelRegistroMascotas();
+		crearPanelRegistroClientes();
+		crearPanelRegistroMascotas();
 		 
 	}
 
@@ -574,9 +589,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	}
 	
 	private void crearPanelCita() {
-		
-		
-		// Panel 2 Citas-------------------------------------------------------------------------------------------------------------------------------------------
+				
 		 JPanel Cita = new JPanel();
 		 Cita.setBackground(SystemColor.control);
 		 Cita.setForeground(Color.WHITE);
@@ -742,21 +755,27 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		lblResultado.setBackground(Color.WHITE);
 		lblResultado.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblResultado.setBounds(58, 362, 767, 14);
+		lblResultado.setVisible(false);
 		registro.add(lblResultado);
 		
 		btnEditarRegistro = new JButton("EDITAR DATOS");
 		btnEditarRegistro.setBackground(new Color(176, 224, 230));
-		btnEditarRegistro.setBounds(787, 387, 199, 23);
+		btnEditarRegistro.setBounds(693, 400, 199, 23);
+		btnEditarRegistro.setVisible(false);
+		btnEditarRegistro.addActionListener(this);
 		registro.add(btnEditarRegistro);
 		
 		btnEliminarCliente = new JButton("ELIMINAR CLIENTE");
 		btnEliminarCliente.setBackground(new Color(205, 92, 92));
-		btnEliminarCliente.setBounds(787, 439, 199, 23);
+		btnEliminarCliente.setBounds(693, 455, 199, 23);
+		btnEliminarCliente.setVisible(false);
+		btnEliminarCliente.addActionListener(this);
 		registro.add(btnEliminarCliente);
 		
 		lblNombreBuscado = new JLabel("Nombre :");
 		lblNombreBuscado.setBackground(Color.WHITE);
 		lblNombreBuscado.setBounds(58, 387, 114, 14);
+		lblNombreBuscado.setVisible(false);
 		registro.add(lblNombreBuscado);
 		
 		textNombreC = new JTextField();
@@ -764,59 +783,70 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		textNombreC.setBounds(58, 401, 562, 20);
 		registro.add(textNombreC);
 		textNombreC.setColumns(10);
+		textNombreC.setVisible(false);
 		
 		lblApellidoBuscado = new JLabel("Primer apellido :");
 		lblApellidoBuscado.setBackground(Color.WHITE);
 		lblApellidoBuscado.setBounds(58, 440, 187, 14);
+		lblApellidoBuscado.setVisible(false);
 		registro.add(lblApellidoBuscado);
 		
 		textPrimerApellidoC = new JTextField();
 		textPrimerApellidoC.setBackground(Color.WHITE);
 		textPrimerApellidoC.setColumns(10);
 		textPrimerApellidoC.setBounds(58, 456, 562, 20);
+		textPrimerApellidoC.setVisible(false);
 		registro.add(textPrimerApellidoC);
 		
 		lblApellidoBuscado2 = new JLabel("Segundo apellido :");
 		lblApellidoBuscado2.setBackground(Color.WHITE);
 		lblApellidoBuscado2.setBounds(58, 493, 187, 14);
+		lblApellidoBuscado2.setVisible(false);
 		registro.add(lblApellidoBuscado2);
 		
 		textSegundoApellido = new JTextField();
 		textSegundoApellido.setBackground(Color.WHITE);
 		textSegundoApellido.setColumns(10);
 		textSegundoApellido.setBounds(58, 509, 562, 20);
+		textSegundoApellido.setVisible(false);
 		registro.add(textSegundoApellido);
 		
 		lblDireccBuscada = new JLabel("Direcci\u00F3n : ");
 		lblDireccBuscada.setBackground(Color.WHITE);
 		lblDireccBuscada.setBounds(58, 545, 562, 14);
+		lblDireccBuscada.setVisible(false);
 		registro.add(lblDireccBuscada);
 		
 		textDireccBuscada = new JTextField();
 		textDireccBuscada.setColumns(10);
 		textDireccBuscada.setBackground(Color.WHITE);
 		textDireccBuscada.setBounds(58, 560, 562, 20);
+		textDireccBuscada.setVisible(false);
 		registro.add(textDireccBuscada);
 		
 		lblLocalidadB = new JLabel("Localidad :");
 		lblLocalidadB.setBackground(Color.WHITE);
 		lblLocalidadB.setBounds(58, 594, 562, 14);
+		lblLocalidadB.setVisible(false);
 		registro.add(lblLocalidadB);
 		
 		textLocalidadBuscada = new JTextField();
 		textLocalidadBuscada.setColumns(10);
 		textLocalidadBuscada.setBackground(Color.WHITE);
 		textLocalidadBuscada.setBounds(58, 608, 562, 20);
+		textLocalidadBuscada.setVisible(false);
 		registro.add(textLocalidadBuscada);
 		
 		lblTelefonosBuscados = new JLabel("Tel\u00E9fonos :");
 		lblTelefonosBuscados.setBackground(Color.WHITE);
 		lblTelefonosBuscados.setBounds(58, 639, 562, 14);
+		lblTelefonosBuscados.setVisible(false);
 		registro.add(lblTelefonosBuscados);
 		
 		textTelfBusc1 = new JTextField();
 		textTelfBusc1.setBackground(Color.WHITE);
 		textTelfBusc1.setBounds(58, 655, 239, 20);
+		textTelfBusc1.setVisible(false);
 		registro.add(textTelfBusc1);
 		textTelfBusc1.setColumns(10);
 		
@@ -824,7 +854,9 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		textTelfBusc2.setColumns(10);
 		textTelfBusc2.setBackground(Color.WHITE);
 		textTelfBusc2.setBounds(381, 655, 239, 20);
+		textTelfBusc2.setVisible(false);
 		registro.add(textTelfBusc2);
+
 	}
 	
 	private void crearPanelRegistroMascotas() throws Exception{
@@ -840,17 +872,26 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		textDniBuscar = new JTextField();
 		textDniBuscar.setToolTipText("introduce el DNI o NIE");
-		textDniBuscar.setBounds(58, 46, 187, 20);
+		textDniBuscar.setBounds(242, 46, 187, 20);
 		registroMascotas.add(textDniBuscar);
 		textDniBuscar.setColumns(10);
 		
+		
+		lblbuscarDni = new JLabel("DNI del propietario/a :");
+		lblbuscarDni.setBounds(58, 52, 181, 14);
+		registroMascotas.add(lblbuscarDni);
+		
+		lblBuscarNombre = new JLabel("Nombre de la mascota :");
+		lblBuscarNombre.setBounds(58, 80, 181, 14);
+		registroMascotas.add(lblBuscarNombre);
+		
 		ImageIcon lupa = new ImageIcon ("H:\\1DAMi\\PRG\\WindowsBuilder\\ClinicaVeterinaria\\Img\\lupa.png");
-		btnBuscar = new JButton("");
-		btnBuscar.setBounds(265, 39, 32, 27);
-		Icon iconoLupa = new ImageIcon(lupa.getImage().getScaledInstance(btnBuscar.getWidth(), btnBuscar.getHeight(), Image.SCALE_DEFAULT));
-		btnBuscar.setIcon(iconoLupa);
-		btnBuscar.addActionListener(this);
-		registroMascotas.add(btnBuscar);
+		btnBuscarMascota = new JButton("");
+		btnBuscarMascota.setBounds(439, 52, 32, 27);
+		Icon iconoLupa = new ImageIcon(lupa.getImage().getScaledInstance(btnBuscarMascota.getWidth(), btnBuscarMascota.getHeight(), Image.SCALE_DEFAULT));
+		btnBuscarMascota.setIcon(iconoLupa);
+		btnBuscarMascota.addActionListener(this);
+		registroMascotas.add(btnBuscarMascota);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(58, 119, 1315, 160);
@@ -872,29 +913,101 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			fila[i][6]= mascotas.get(i).esCastrado();
 		}
 		
-	//	int filaSeleccionada = tablaRegistroMascotas.rowAtPoint(evt.getPoint());
+	
 		tablaRegistroMascotas.setEnabled(false);;
 		scrollPane.setViewportView(tablaRegistroMascotas);
 		
+		// resultado de la búsqueda----------------------------------------------
 		lblResultado = new JLabel("RESULTADO DE LA B\u00DASQUEDA :");
 		lblResultado.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblResultado.setBounds(58, 362, 767, 14);
+		lblResultado.setVisible(false);
 		registroMascotas.add(lblResultado);
 		
-		textResultadoBusquedaMascota = new JTextPane();
-		textResultadoBusquedaMascota.setBackground(new Color(255, 255, 255));
-		textResultadoBusquedaMascota.setBounds(58, 387, 756, 151);
-		registroMascotas.add(textResultadoBusquedaMascota);
+		lblNombreMascotaBuscada = new JLabel("Nombre :");
+		lblNombreMascotaBuscada.setBackground(Color.WHITE);
+		lblNombreMascotaBuscada.setBounds(58, 387, 114, 14);
+		lblNombreMascotaBuscada.setVisible(false);
+		registroMascotas.add(lblNombreMascotaBuscada);
+		
+		textNombreMascotaB = new JTextField();
+		textNombreMascotaB.setBackground(Color.WHITE);
+		textNombreMascotaB.setBounds(58, 401, 562, 20);
+		registroMascotas.add(textNombreMascotaB);
+		textNombreMascotaB.setColumns(10);
+		textNombreMascotaB.setVisible(false);
+		
+		lblEspecieBuscada = new JLabel("Especie :");
+		lblEspecieBuscada.setBackground(Color.WHITE);
+		lblEspecieBuscada.setBounds(58, 440, 187, 14);
+		registroMascotas.add(lblEspecieBuscada);
+		lblEspecieBuscada.setVisible(false);
+		
+		textEspecieBuscada = new JTextField();
+		textEspecieBuscada.setBackground(Color.WHITE);
+		textEspecieBuscada.setColumns(10);
+		textEspecieBuscada.setBounds(58, 456, 562, 20);
+		registroMascotas.add(textEspecieBuscada);
+		textEspecieBuscada.setVisible(false);
+		
+		lblRazaBuscada = new JLabel("Raza :");
+		lblRazaBuscada.setBackground(Color.WHITE);
+		lblRazaBuscada.setBounds(58, 493, 187, 14);
+		registroMascotas.add(lblRazaBuscada);
+		lblRazaBuscada.setVisible(false);
+		
+		textRazaBuscada = new JTextField();
+		textRazaBuscada.setBackground(Color.WHITE);
+		textRazaBuscada.setColumns(10);
+		textRazaBuscada.setBounds(58, 509, 562, 20);
+		registroMascotas.add(textRazaBuscada);
+		textRazaBuscada.setVisible(false);
+		
+		lblSexoBuscado = new JLabel("Sexo :");
+		lblSexoBuscado.setBackground(Color.WHITE);
+		lblSexoBuscado.setBounds(58, 545, 562, 14);
+		registroMascotas.add(lblSexoBuscado);
+		lblSexoBuscado.setVisible(false);
+		
+		textSexoBuscado = new JTextField();
+		textSexoBuscado.setColumns(10);
+		textSexoBuscado.setBackground(Color.WHITE);
+		textSexoBuscado.setBounds(58, 560, 562, 20);
+		registroMascotas.add(textSexoBuscado);
+		textSexoBuscado.setVisible(false);
+		
+		lblFechaBuscada = new JLabel("Fecha de Nacimiento : :");
+		lblFechaBuscada.setBackground(Color.WHITE);
+		lblFechaBuscada.setBounds(58, 594, 562, 14);
+		registroMascotas.add(lblFechaBuscada);
+		lblFechaBuscada.setVisible(false);
+		
+		textFechaBuscada = new JTextField();
+		textFechaBuscada.setColumns(10);
+		textFechaBuscada.setBackground(Color.WHITE);
+		textFechaBuscada.setBounds(58, 608, 562, 20);
+		registroMascotas.add(textFechaBuscada);
+		textFechaBuscada.setVisible(false);
+		
+		chckbxCastradoBuscado = new JCheckBox("Castrado");
+		chckbxCastradoBuscado.setBounds(58, 651, 97, 23);
+		registroMascotas.add(chckbxCastradoBuscado);
+		chckbxCastradoBuscado.setVisible(false);
 		
 		btnEditarRegistroMascota = new JButton("EDITAR DATOS");
 		btnEditarRegistroMascota.setBackground(new Color(176, 224, 230));
-		btnEditarRegistroMascota.setBounds(58, 570, 199, 23);
+		btnEditarRegistroMascota.setBounds(675, 400, 199, 23);
 		registroMascotas.add(btnEditarRegistroMascota);
+		btnEditarRegistroMascota.setVisible(false);
+		btnEditarRegistroMascota.addActionListener(this);
 		
 		btnEliminarMascota = new JButton("ELIMINAR MASCOTA");
 		btnEliminarMascota.setBackground(new Color(205, 92, 92));
-		btnEliminarMascota.setBounds(284, 570, 199, 23);
+		btnEliminarMascota.setBounds(675, 455, 199, 23);
 		registroMascotas.add(btnEliminarMascota);
+		btnEliminarMascota.setVisible(false);
+		btnEliminarMascota.addActionListener(this);
+				
 	}
 	
 	//----------MÉTODOS DEL ÁREA DE PERSONAL------------------------------------------------------------------------------------------------------//
@@ -1436,6 +1549,76 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 	}
 
+	// método que muestra el resultado de la búsqueda por DNI del cliente
+	private void mostrarResultadoBusqueda(Cliente clienteBuscado, boolean blnVisible) {
+		lblResultado.setVisible(blnVisible);
+
+		lblNombreBuscado.setVisible(blnVisible);
+		textNombreC.setVisible(blnVisible);
+		lblEspecieBuscada.setVisible(blnVisible);
+		textPrimerApellidoC.setVisible(blnVisible);
+		lblRazaBuscada.setVisible(blnVisible);
+		textSegundoApellido.setVisible(blnVisible);
+		lblSexoBuscado.setVisible(blnVisible);
+		textDireccBuscada.setVisible(blnVisible);
+		lblFechaBuscada.setVisible(blnVisible);
+		textLocalidadBuscada.setVisible(blnVisible);
+		textTelfBusc1.setVisible(blnVisible);
+		textTelfBusc2.setVisible(blnVisible);
+
+		btnEditarRegistro.setVisible(blnVisible);
+		btnEliminarCliente.setVisible(blnVisible);
+		
+	}
+	
+	// método que muestra el resultado de la búsqueda por DNI y nombre de la mascota
+	private void mostrarResultadoMascota(Mascota mascotaBuscada, boolean blnVisible) {
+		lblResultado.setVisible(blnVisible);
+		lblNombreMascotaBuscada.setVisible(blnVisible);
+		textNombreMascotaB.setVisible(blnVisible);
+		lblEspecieBuscada.setVisible(blnVisible);
+		textEspecieBuscada.setVisible(blnVisible);
+		lblRazaBuscada.setVisible(blnVisible);
+		textRazaBuscada.setVisible(blnVisible);
+		lblSexoBuscado.setVisible(blnVisible);
+		textSexoBuscado.setVisible(blnVisible);
+		lblFechaBuscada.setVisible(blnVisible);
+		textFechaBuscada.setVisible(blnVisible);
+		chckbxCastradoBuscado.setVisible(blnVisible);
+
+		btnEditarRegistroMascota.setVisible(blnVisible);
+		btnEliminarMascota.setVisible(blnVisible);
+	}
+	
+	private Mascota guardarDatosMascota() {
+		Mascota m = new Mascota();
+		
+		m.setId(textDniBuscar.getText());
+		m.setNombre(textNombreMascotaB.getText());
+		m.setEspecie(textEspecieBuscada.getText());
+		m.setRaza(textRazaBuscada.getText());
+		m.setSexo(textSexoBuscado.getText());
+		//recogemos en un string el texto del campo fecha de nacimiento:
+		String fecha = textFechaBuscada.getText().trim();
+		
+		//indicamos el formato que acepta MySQL en las variables de tipo date:
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date fechaNac = null;
+		
+		//convertimos el string en LocalDate: 
+		try {
+			fechaNac=formatter.parse(fecha);
+		}catch (ParseException e1){
+			System.out.println(e1);
+		}
+		
+		//instanciamos la fecha:
+		
+		m.setFechaNacimiento(fechaNac);
+		m.setBlnCastrado(chckbxCastradoBuscado.isSelected());
+		
+		return m;
+	}
 	
 	//----------MÉTODOS DEL ÁREA DE CLIENTE----------------------------------------------------------------------------------------------------//
 	
@@ -1663,6 +1846,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		return blnCorrectos;
 	}
+	
 	// método que recoge los cambios que ha realizado
 	private Cliente cargarCambios() {
 		Cliente cambiado = new Cliente();
@@ -1716,6 +1900,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		         return null;
 		     }
 		 }
+	
+	
 	
 	//------------------ACTION LISTENERS-------------------------------------------------------------------------------------------------//
 	
@@ -1990,7 +2176,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			try {
 				Cliente clienteBuscado = manager.getCliente(dniBuscado);
 				if(clienteBuscado !=null) {
-				//	mostrarResultadoBusqueda(clienteBuscado);
+					mostrarResultadoBusqueda(clienteBuscado, true);
 				}
 				else {
 					String mensaje = "No se ha encontrado ningún cliente con ese DNI";
@@ -2006,6 +2192,73 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		}
 		if(e.getSource().equals(btnEditarRegistro)){
 			
+		}
+		if(e.getSource().equals(btnEliminarCliente)) {
+			
+			String dni = textDniBuscar.getText();
+			try {
+				String mensaje = "¿Quieres eliminar al cliente?"+"\n"
+								+"Nota: Se eliminá el registro de sus mascotas";
+				
+				int opc = JOptionPane.showConfirmDialog(this, mensaje, "AVISO", JOptionPane.YES_NO_OPTION);
+				
+				if(opc == JOptionPane.YES_OPTION) {
+					
+					manager.borrarCliente(dni);
+				}
+				
+				
+			}catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
+			
+		}
+		if(e.getSource().equals(btnBuscarMascota)) {
+			String dniPropietario = textDniBuscar.getText();
+			String nombre = textNombreMascotaB.getText();
+			try {
+				Mascota mascotaBuscada = manager.getMascota(dniPropietario, nombre);
+				mostrarResultadoMascota(mascotaBuscada, true);
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		if(e.getSource().equals(btnEditarRegistroMascota)){
+			
+			String mensaje = "¿Quieres guardar los cambios?";
+			
+			int opc = JOptionPane.showConfirmDialog(this, mensaje, "AVISO", JOptionPane.YES_NO_OPTION);
+			
+			if(opc == JOptionPane.YES_OPTION) {
+				try {
+					Mascota m = guardarDatosMascota();
+					manager.editarDatosMascota(m);
+					
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		if(e.getSource().equals(btnEliminarMascota)) {
+			
+			String dniPropietario = textDniBuscar.getText();
+			String nombre = textNombreMascotaB.getText();
+			
+			try {
+				String mensaje = "¿Quieres eliminar esta mascota?";
+		
+				int opc = JOptionPane.showConfirmDialog(this, mensaje, "AVISO", JOptionPane.YES_NO_OPTION);
+				
+				if(opc == JOptionPane.YES_OPTION) {
+			
+					manager.borrarMascota(dniPropietario, nombre);
+				
+				}
+			}catch(Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
