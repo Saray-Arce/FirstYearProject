@@ -1,8 +1,5 @@
 package clases;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Mascota {
 	private int id;
 	private String propietario;

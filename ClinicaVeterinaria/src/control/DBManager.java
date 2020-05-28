@@ -235,7 +235,7 @@ public class DBManager {
 			aux = new Mascota();
 			aux.setId(rs.getInt("id"));
 			aux.setPropietario(rs.getString("propietario"));
-			aux.setNombre(rs.getNString("nombre"));
+			aux.setNombre(rs.getString("nombre"));
 			aux.setEspecie(rs.getString("especie"));
 			aux.setRaza(rs.getString("raza"));
 			aux.setSexo(rs.getString("sexo"));
@@ -290,7 +290,7 @@ public class DBManager {
 		
 		this.openConnection();
 		
-		String update = "update mascotas set raza ='"+m.getRaza()+"', sexo = '"+m.getSexo()+"', fechaNacimiento = '"+m.getFechaNacimiento()+"', castrado = "+m.isBlnCastrado()+" where propietario ='"+m.getPropietario()+"' and nombre = '"+m.getNombre()+"';";
+		String update = "update mascotas set raza ='"+m.getRaza()+"', sexo = '"+m.getSexo()+"', fechaNacimiento = '"+m.getFechaNacimiento()+"', castrado = "+m.isBlnCastrado()+" where id ="+m.getId()+";";
 		
 		stmt.executeUpdate(update);
 		
