@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import clases.Cita;
 import clases.Cliente;
 import clases.Mascota;
 import clases.Personal;
-import clases.Tienda;
 import clases.Usuario;
 
 public class DBManager {
@@ -155,17 +156,40 @@ public class DBManager {
 	}
 
 	// método para guardar los datos de una nueva mascota
-	public void guardarDatosMascota(Mascota nuevaM) throws Exception{
+	public void guardarDatosMascota(Mascota nuevaM) {
 		
-		this.openConnection();
+		try {
+			this.openConnection();
 		
-		String insert = "insert into mascotas (id, nombre, especie, raza, sexo, fechaNacimiento, castrado) values ('"+nuevaM.getId()+"','"+nuevaM.getNombre()+"','"+nuevaM.getEspecie()+"','"+nuevaM.getRaza()+"','"+nuevaM.getSexo()+"','"+nuevaM.getFechaNacimiento()+"',"+nuevaM.isBlnCastrado()+");";
+			
+			
+			int codigo = 0;
+			
+			String select = "select max(id) from mascotas";
+			
+			try {
+				ResultSet rs = stmt.executeQuery(select);
+				while(rs.next()) {
+					codigo = rs.getInt("max(id)");
+				}
+				codigo = codigo+1;
+				
+				
+				
+				String insert = "insert into mascotas (id, propietario,nombre, especie, raza, sexo, fechaNacimiento, castrado) values ("+codigo+",'"+nuevaM.getPropietario()+"','"+nuevaM.getNombre()+"','"+nuevaM.getEspecie()+"','"+nuevaM.getRaza()+"','"+nuevaM.getSexo()+"','"+nuevaM.getFechaNacimiento()+"',"+nuevaM.isBlnCastrado()+");";
+				
+				stmt.executeUpdate(insert);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
 		
-	//	String insert = "insert into mascotas (id, nombre, tipo, raza, sexo) values ('"+nuevaM.getId()+"','"+nuevaM.getNombre()+"','"+nuevaM.getTipo()+"','"+nuevaM.getRaza()+"','"+nuevaM.getSexo()+"');"; //'"+nuevaM.getFechaNacimiento()+"'
-		
-		stmt.executeUpdate(insert);
-		
-		this.closeConnection(); //cerramos conexión con la base de datos
+			this.closeConnection(); //cerramos conexión con la base de datos
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	// método para obtener las mascotas del cliente registrado
@@ -174,17 +198,19 @@ public class DBManager {
 		Mascota aux;
 		this.openConnection();
 		
-		String select = "select * from mascotas where id = '" +dniCliente+"'"; //se escribe la Select
+		String select = "select * from mascotas where propietario = '" +dniCliente+"'"; //se escribe la Select
 		ResultSet rs = stmt.executeQuery(select);
 		
 		while(rs.next()) {
 			aux = new Mascota();
-			aux.setId(rs.getString("id"));
+			aux.setId(rs.getInt("id"));
+			aux.setPropietario(rs.getString("propietario"));
 			aux.setNombre(rs.getNString("nombre"));
 			aux.setEspecie(rs.getString("especie"));
 			aux.setRaza(rs.getString("raza"));
 			aux.setSexo(rs.getString("sexo"));
-			aux.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+			
+			aux.setFechaNacimiento(rs.getDate("fechaNacimiento").toString());
 			aux.setBlnCastrado(rs.getBoolean("castrado"));
 			mascotas.add(aux);
 		}
@@ -202,17 +228,18 @@ public class DBManager {
 		Mascota aux;
 		this.openConnection();
 		
-		String select = "select id, nombre, especie, raza, sexo, fechaNacimiento, castrado from mascotas order by id desc"; //se escribe la Select
+		String select = "select * from mascotas"; //se escribe la Select
 		ResultSet rs = stmt.executeQuery(select);
 		
 		while(rs.next()) {
 			aux = new Mascota();
-			aux.setId(rs.getString("id"));
+			aux.setId(rs.getInt("id"));
+			aux.setPropietario(rs.getString("propietario"));
 			aux.setNombre(rs.getNString("nombre"));
 			aux.setEspecie(rs.getString("especie"));
 			aux.setRaza(rs.getString("raza"));
 			aux.setSexo(rs.getString("sexo"));
-			aux.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+			aux.setFechaNacimiento(rs.getDate("fechaNacimiento").toString());
 			aux.setBlnCastrado(rs.getBoolean("castrado"));
 			mascotas.add(aux);
 		}
@@ -233,48 +260,23 @@ public class DBManager {
 		this.closeConnection();
 	}
 
-	// método para cargar los artículos de la tienda
-	public ArrayList<Tienda> getArticulosTienda(String animal) throws Exception{
-		ArrayList <Tienda> articulos = new ArrayList <Tienda>();
-		Tienda aux;
-	
-		this.openConnection();
-		
-		String select = "select codigo, nombre, descripcion, animal, tipo, precio_PVP, almacenados from tienda where animal='"+animal+"'"; //se escribe la Select
-		ResultSet rs = stmt.executeQuery(select);
-		
-		while(rs.next()) {
-			aux = new Tienda();
-			aux.setCodigo(rs.getString("codigo"));
-			aux.setNombre(rs.getNString("nombre"));
-			aux.setDescripcion(rs.getString("descripcion"));
-			aux.setAnimal(rs.getString("animal"));
-			aux.setTipo(rs.getString("tipo"));
-			aux.setPrecio(rs.getFloat("precio_PVP"));
-			aux.setAlmacenados(rs.getInt("almacenados"));
-			articulos.add(aux);
-		}
-		
-		rs.close();
-		this.closeConnection();
-		
-		return articulos;
-	}
 
 	public Mascota getMascota(String dniPropietario, String nombre) throws Exception{
 		Mascota mascota = new Mascota ();
 		this.openConnection();
 		
-		String select = "select nombre, especie, raza, sexo, fechaNacimiento, castrado from mascotas where id='"+dniPropietario+"' and nombre='"+nombre+"';";
+		String select = "select id, propietario, nombre, especie, raza, sexo, fechaNacimiento, castrado from mascotas where propietario='"+dniPropietario+"' and nombre='"+nombre+"';";
 		
 		ResultSet rs =stmt.executeQuery(select);
 		
 		while(rs.next()) {
+			mascota.setId(rs.getInt("id"));
+			mascota.setPropietario(rs.getString("propietario"));
 			mascota.setNombre(rs.getString("nombre"));
 			mascota.setEspecie(rs.getString("especie"));
 			mascota.setRaza(rs.getString("raza"));
 			mascota.setSexo(rs.getString("sexo"));
-			mascota.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+			mascota.setFechaNacimiento(rs.getDate("fechaNacimiento").toString());
 			mascota.setBlnCastrado(rs.getBoolean("castrado"));
 		}
 		
@@ -288,7 +290,7 @@ public class DBManager {
 		
 		this.openConnection();
 		
-		String update = "update mascotas set raza ='"+m.getRaza()+"', sexo = '"+m.getSexo()+"', fechaNacimiento = '"+m.getFechaNacimiento()+"', castrado = "+m.isBlnCastrado()+" where id ='"+m.getId()+"' and nombre = '"+m.getNombre()+"';";
+		String update = "update mascotas set raza ='"+m.getRaza()+"', sexo = '"+m.getSexo()+"', fechaNacimiento = '"+m.getFechaNacimiento()+"', castrado = "+m.isBlnCastrado()+" where propietario ='"+m.getPropietario()+"' and nombre = '"+m.getNombre()+"';";
 		
 		stmt.executeUpdate(update);
 		
@@ -300,9 +302,9 @@ public class DBManager {
 		
 		this.openConnection();
 		
-		String update = "delete from mascotas where id= '"+dniPropietario+"' and nombre = '"+nombre+"';";
+		String delete = "delete from mascotas where propietario= '"+dniPropietario+"' and nombre = '"+nombre+"';";
 		
-		stmt.executeUpdate(update);
+		stmt.executeUpdate(delete);
 		
 		this.closeConnection();
 	}
@@ -311,18 +313,135 @@ public class DBManager {
 		
 		this.openConnection();
 		
-		//primero borramos las mascotas
-		String update = "delete from clientes where id= '"+dni+"';";
+		// borramos registro en tabla usuarios
+		String delete = "delete from usuarios where usuario= '"+dni+"';";
 		
-		stmt.executeUpdate(update);
+		stmt.executeUpdate(delete);
 		
-		//después borramos al cliente
-		String update2 = "delete from clientes where dni= '"+dni+"' ;";
+		// borramos las mascotas
+		String delete2 = "delete from mascotas where propietario= '"+dni+"';";
 		
-		stmt.executeUpdate(update2);
+		stmt.executeUpdate(delete2);
+		
+		// borramos al cliente de la tabla clientes
+		String delete3 = "delete from clientes where dni= '"+dni+"' ;";
+		
+		stmt.executeUpdate(delete3);
 		
 		this.closeConnection();
 		
+	}
+
+	public Personal getVeterinarioAsignado(String especie) throws Exception {
+		
+		Personal veterinario = new Personal();
+		
+		this.openConnection();
+		
+		String select = "select * from personal where especialidad like '%"+especie+"%';";
+		
+		ResultSet rs = stmt.executeQuery(select);
+		
+		while(rs.next()) {
+			veterinario.setId(rs.getString("id"));
+			veterinario.setNombre(rs.getNString("nombre"));
+			veterinario.setApellido1(rs.getString("apellido1"));
+			veterinario.setApellido2(rs.getString("apellido2"));
+			veterinario.setEspecialidad(rs.getString("especialidad"));
+		}
+		
+		this.closeConnection();
+		
+		return veterinario;
+	}
+
+	public String getEspecie(String nombre, String dni) throws Exception{
+		String especie ="";
+		this.openConnection();
+		String select = "select especie from mascotas where propietario ='"+dni+"' and nombre = '"+nombre+"';";
+		
+		ResultSet rs = stmt.executeQuery(select);
+		
+		while(rs.next()) {
+			especie=rs.getString("especie");
+		}
+		
+		this.closeConnection();
+		return especie;
+	}
+
+	public void insertarCita(Cita cita) throws Exception {
+		this.openConnection();
+		
+		int codigo = 0;
+		
+		String select = "select max(codigo) from citas";
+		ResultSet rs = stmt.executeQuery(select);
+		while(rs.next()) {
+			codigo = rs.getInt("max(codigo)");
+		}
+		codigo = codigo+1;
+		
+		
+		String insert = "insert into citas (codigo, id_mascota, id_vet, nombre_mascota, fecha_visita, hora_visita, descripcion) values ('"+codigo+"','"+cita.getId_pet()+"','"+cita.getId_vet()+"','"+cita.getNombreMascota()+"','"+cita.getFechaVisita()+"','"+cita.getHora()+"','"+cita.getDescripcion()+"');";
+		
+		stmt.executeUpdate(insert);
+		
+		this.closeConnection();
+	}
+
+	public String obtenerIdMascota(String nombre, String propietario) throws Exception{
+		this.openConnection();
+		
+		String id ="";
+		String select = "select especie from mascotas where propietario ='"+propietario+"' and nombre = '"+nombre+"';";
+		
+		ResultSet rs = stmt.executeQuery(select);
+		
+		while(rs.next()) {
+			id=rs.getString("id");
+		}
+		this.closeConnection();
+		return id;
+	}
+
+	public void updateAnotacion(String codigo, String descripcion) throws Exception{
+		
+		this.openConnection();
+		
+		String update = "update citas set descripcion = '"+descripcion+"' where codigo = '"+codigo+"';";
+		
+		stmt.executeUpdate(update);
+		
+		
+		this.closeConnection();
+		
+	}
+
+	public ArrayList<Cita> getCitas() throws Exception{
+		ArrayList <Cita> citas = new ArrayList <Cita>();
+		Cita aux;
+		this.openConnection();
+		
+		String select = "select * from citas"; //se escribe la Select
+		ResultSet rs = stmt.executeQuery(select);
+		
+		while(rs.next()) {
+			aux = new Cita();
+			aux.setCodigo(rs.getInt("codigo"));
+			aux.setId_pet(rs.getInt("id_mascota"));
+			aux.setId_vet(rs.getNString("id_vet"));
+			aux.setNombreMascota(rs.getString("nombre_mascota"));
+			aux.setFechaVisita(rs.getDate("fecha_visita").toString());
+			aux.setHora(rs.getString("hora_visita"));
+			aux.setDescripcion(rs.getString("descripcion"));
+			citas.add(aux);
+		}
+		
+		rs.close();
+		this.closeConnection();
+		
+		return citas;
 	}
 
 }

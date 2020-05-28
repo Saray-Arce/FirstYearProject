@@ -1,10 +1,11 @@
 package control;
 
 import java.util.ArrayList;
+
+import clases.Cita;
 import clases.Cliente;
 import clases.Mascota;
 import clases.Personal;
-import clases.Tienda;
 import clases.Usuario;
 
 public class Manager {
@@ -84,14 +85,6 @@ public class Manager {
 		
 	}
 
-	public ArrayList<Tienda> getArticulosTienda(String animal) throws Exception{
-		DBManager dbManager = new DBManager();
-		
-		ArrayList<Tienda> articulos = dbManager.getArticulosTienda(animal);
-		
-		return articulos;
-	}
-
 	public Mascota getMascota(String dniPropietario, String nombre) throws Exception {
 		DBManager dbManager = new DBManager();
 		
@@ -122,6 +115,46 @@ public class Manager {
 		dbManager.borrarCliente(dni);
 		
 	}
+
+	public Personal getVeterinarioAsignado(String especie) throws Exception {
+		
+		DBManager dbManager = new DBManager();
+		
+		Personal veterinario = dbManager.getVeterinarioAsignado(especie);
+		
+		return veterinario;
+	}
+
+	public String getEspecie(String nombre, String dni) throws Exception {
+		DBManager dbManager = new DBManager();
+		String especie = dbManager.getEspecie(nombre, dni);
+		return especie;
+	}
+
+	public void insertarCita(Cita cita) throws Exception {
+		
+		DBManager dbManager = new DBManager();
+		
+		dbManager.insertarCita(cita);
+	}
+
+	public void updateAnotacion(String codigo, String descripcion) throws Exception {
+		DBManager dbManager = new DBManager();
+		
+		dbManager.updateAnotacion(codigo, descripcion);
+		
+	}
+
+	public ArrayList<Cita> getCitas() throws Exception{
+		
+		DBManager dbManager = new DBManager();
+		
+		ArrayList <Cita> citas = dbManager.getCitas();
+		
+		return citas;
+	}
+
+	
 	
 	
 }

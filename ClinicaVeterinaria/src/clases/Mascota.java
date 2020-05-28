@@ -4,21 +4,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Mascota {
-	private String id;
+	private int id;
+	private String propietario;
 	private String nombre;
 	private String especie;
 	private String raza;
 	private String sexo;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private boolean blnCastrado;
 	
 	
 	// methods setter & getter
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -45,26 +46,12 @@ public class Mascota {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
 	public boolean isBlnCastrado() {
 		return blnCastrado;
 	}
 	public void setBlnCastrado(boolean blnCastrado) {
 		this.blnCastrado = blnCastrado;
 	}
-	public String formatearFecha() {
-		
-		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-		String fechaNac = formato.format(fechaNacimiento);
-		
-		return fechaNac;
-	}
-	
 	public String esCastrado() {
 		
 		String estaCastrado;
@@ -77,6 +64,18 @@ public class Mascota {
 		}
 		return estaCastrado;
 		
+	}
+	public String getPropietario() {
+		return propietario;
+	}
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(String fecha) {
+		this.fechaNacimiento = fecha;
 	}
 		
 	
