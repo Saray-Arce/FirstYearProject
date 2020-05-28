@@ -100,11 +100,11 @@ public class Manager {
 		
 	}
 
-	public void borrarMascota(String dniPropietario, String nombre) throws Exception{
+	public void borrarMascota(String id, String nombre) throws Exception{
 		
 		DBManager dbManager = new DBManager();
 		
-		dbManager.borrarMascota(dniPropietario, nombre);
+		dbManager.borrarMascota(id, nombre);
 		
 	}
 

@@ -59,7 +59,7 @@ public class DBManager {
 		Cliente aux;
 		
 		this.openConnection();
-		String select = "select dni, nombre, apellido1, apellido2, direccion, localidad, telefono1, telefono2 from clientes order by apellido1";
+		String select = "select * from clientes";
 		ResultSet rs = stmt.executeQuery(select);
 		
 		// Bucle para cada resultado en la consulta
@@ -298,11 +298,11 @@ public class DBManager {
 		
 	}
 
-	public void borrarMascota(String dniPropietario, String nombre) throws Exception {
+	public void borrarMascota(String id, String nombre) throws Exception {
 		
 		this.openConnection();
 		
-		String delete = "delete from mascotas where propietario= '"+dniPropietario+"' and nombre = '"+nombre+"';";
+		String delete = "delete from mascotas where id= '"+id+"' and nombre = '"+nombre+"';";
 		
 		stmt.executeUpdate(delete);
 		

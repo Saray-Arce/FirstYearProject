@@ -29,6 +29,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.JSeparator;
@@ -120,6 +121,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JButton btnRegistraMascota;
 	
 	private JLabel lblDatosRegistroMascota;
+	private JLabel lblDniPropietario;
+	private JTextField textaltaDniPropietario;
 	private JLabel lblNombreAltaMascota;
 	private JTextField textAltaNombreMascota;
 	private JLabel lblEspecieMascota;
@@ -220,14 +223,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			break;
 		}
 		
-	//	crearPanelAreaCliente(dniUsuario);
-		
-	//	crearPanelCita(dniUsuario);
-		 
-	//	crearPanelPersonal(dniUsuario);
-		
-	//	crearPanelRegistroClientes();
-	//	crearPanelRegistroMascotas();
+	
 		 
 	}
 
@@ -310,21 +306,25 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 textEspecialidad.setColumns(10);
 		 
 		 btnAltaMascotas = new JButton("ALTA DE MASCOTA");
+		 btnAltaMascotas.setBackground(new Color(176, 224, 230));
 		 btnAltaMascotas.setBounds(23, 483, 225, 44);
 		 personal.add(btnAltaMascotas);
 		 btnAltaMascotas.addActionListener(this);
 		   
 		 btnAltaClientes = new JButton("ALTA DE CLIENTE");
+		 btnAltaClientes.setBackground(new Color(176, 224, 230));
 		 btnAltaClientes.setBounds(23, 407, 225, 44);
 		 personal.add(btnAltaClientes);
 		 btnAltaClientes.addActionListener(this);
 		   
 		 btnCerrarSesionPersonal = new JButton("CERRAR SESI\u00D3N");
+		 btnCerrarSesionPersonal.setBackground(new Color(205, 92, 92));
 		 btnCerrarSesionPersonal.setBounds(23, 641, 225, 44);
 		 personal.add(btnCerrarSesionPersonal);
 		 btnCerrarSesionPersonal.addActionListener(this);
 		 
 		 btnRellenarCita = new JButton("RELLENAR CITA");
+		 btnRellenarCita.setBackground(new Color(176, 224, 230));
 		 btnRellenarCita.setBounds(23, 563, 225, 44);
 		 personal.add(btnRellenarCita);
 		 btnRellenarCita.addActionListener(this);
@@ -361,12 +361,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		textField.setVisible(false);
 				 
 		btnAnotaciones = new JButton("GUARDAR ANOTACIONES");
+		btnAnotaciones.setBackground(new Color(143, 188, 143));
 		btnAnotaciones.setBounds(357, 563, 330, 23);
 		personal.add(btnAnotaciones);
 		btnAnotaciones.setVisible(false);
 		btnAnotaciones.addActionListener(this);
 			
 		btnBorrarAnotacion = new JButton("BORRAR ANOTACIONES");
+		btnBorrarAnotacion.setBackground(new Color(205, 92, 92));
 		btnBorrarAnotacion.setBounds(1039, 563, 330, 23);
 		personal.add(btnBorrarAnotacion);
 		btnBorrarAnotacion.setVisible(false);
@@ -387,7 +389,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		crearTablaCitas(personal, false);
 		altacliente(personal, false);
 		altaMascota(personal, false);
-		mostrarDatosCitas(false);
 		
 	}
 	
@@ -403,7 +404,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(357, 133, 1012, 225);
 		personal.add(scrollPane_1);
-		scrollPane_1.setVisible(blnVisible);
+		
 		 
 		 ArrayList <Cita> citas;
 		 
@@ -427,8 +428,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 					fila[i][4]= citas.get(i).getHora();
 					fila[i][5]= citas.get(i).getDescripcion();
 				}
-			}
-			
+			}			
 			
 		} catch (Exception e1) {
 			
@@ -449,6 +449,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 tablaCitas.setEnabled(false);
 		 tablaCitas.setVisible(blnVisible);
 		 scrollPane_1.setViewportView(tablaCitas);
+		 scrollPane_1.setVisible(blnVisible);
 		 
 	}
 
@@ -575,7 +576,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 btnMascotas.addActionListener(this);
 		   
 		 btnCerrarSesionCliente = new JButton("CERRAR SESI\u00D3N");
-		 btnCerrarSesionCliente.setBackground(new Color(176, 224, 230));
+		 btnCerrarSesionCliente.setBackground(new Color(205, 92, 92));
 		 btnCerrarSesionCliente.setBounds(23, 585, 225, 44);
 		 ficha.add(btnCerrarSesionCliente);
 		 btnCerrarSesionCliente.addActionListener(this);
@@ -706,22 +707,26 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 Cita.add(textDatosCita);
 		 
 		 btnValidarCita = new JButton("Validar");
+		 btnValidarCita.setBackground(new Color(143, 188, 143));
 		 btnValidarCita.setBounds(1039, 298, 113, 35);
 		 Cita.add(btnValidarCita);
 		 btnValidarCita.addActionListener(this);
 		 
 		 btnBorrarDatosCita = new JButton("Borrar datos");
+		 btnBorrarDatosCita.setBackground(new Color(205, 92, 92));
 		 btnBorrarDatosCita.setBounds(1265, 298, 113, 35);
 		 Cita.add(btnBorrarDatosCita);
 		 btnBorrarDatosCita.addActionListener(this);
 		 
 		 btnVerDatos = new JButton("Ver datos");
+		 btnVerDatos.setBackground(new Color(176, 224, 230));
 		 btnVerDatos.setBounds(815, 298, 113, 35);
 		 Cita.add(btnVerDatos);
 		 btnVerDatos.addActionListener(this);
 	}
 
 	private void crearPanelRegistroClientes() throws Exception{
+			
 		registro = new JPanel();
 		registro.setBackground(Color.WHITE);
 		panelPestanas.addTab("Registro de clientes", null, registro, null);
@@ -831,46 +836,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		textTelfBusc2.setBounds(381, 655, 239, 20);
 		registro.add(textTelfBusc2);
 		
-		limpiarFormularioRegistro();
-		crearTablaRegistroClientes(registro);
-	}
-	
-	private void crearTablaRegistroClientes(JPanel registro) {
-		
-		limpiarFormularioRegistro();
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(58, 119, 1315, 160);
-		registro.add(scrollPane);
-		
-		ArrayList<Cliente> clientes;
-		try {
-			clientes = manager.getClientes();
-		
-				
-		String titulos[]= {"DNI","NOMBRE","PRIMER APELLIDO","SEGUNDO APELLIDO","DIRECCION","LOCALIDAD","TELÉFONO", "TELÉFONO SECUNDARIO"};
-		String  fila[][]= new String[clientes.size()] [titulos.length];
-				
-		for(int i=0;i<clientes.size();i++) {			
-			fila[i][0]= clientes.get(i).getDni();
-			fila[i][1]= clientes.get(i).getNombre();
-			fila[i][2]= clientes.get(i).getApellido1();
-			fila[i][3]= clientes.get(i).getApellido2();
-			fila[i][4]= clientes.get(i).getDireccion();
-			fila[i][5]= clientes.get(i).getLocalidad();
-			fila[i][6]= clientes.get(i).getTelefono1();
-			if(clientes.get(i).getTelefono2() == "null") {
-				fila[i][7]= "";
-			}
-			else {
-				fila[i][7]= clientes.get(i).getTelefono2();
-			}
-		}
-		
-		
-		tablaClientes = new JTable(fila, titulos);
-		tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tablaClientes.setEnabled(false);
-		scrollPane.setViewportView(tablaClientes);
+		JScrollPane scrollPaneCliente = new JScrollPane();
+		scrollPaneCliente.setBounds(58, 119, 1315, 160);
+		registro.add(scrollPaneCliente);
+		tablaClientes = new JTable();
+		datosTablaClientes();
+		scrollPaneCliente.setViewportView(tablaClientes);
 		
 		tablaClientes.addMouseListener(new MouseAdapter() {
 		      public void mouseClicked(MouseEvent e) 
@@ -888,13 +859,51 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			         }
 			   }
 		  });
+				
+		limpiarFormularioRegistro();
+		
+	}
+	
+	private void datosTablaClientes() {
+		
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+		tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+		try {
+			clientes = manager.getClientes();
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-	}
+				
+		String titulos[]= new String[] {"DNI","NOMBRE","PRIMER APELLIDO","SEGUNDO APELLIDO","DIRECCION","LOCALIDAD","TELÉFONO", "TELÉFONO SECUNDARIO"};
+		
+		DefaultTableModel dtm = new DefaultTableModel(titulos, 0) {
+			/**
+			 * version serial Para que no se puedan editar las celdas
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		for (int i = 0; i < clientes.size(); i++) {
+			dtm.addRow(new Object[] { clientes.get(i).getDni(),clientes.get(i).getNombre(), clientes.get(i).getApellido1(),
+					clientes.get(i).getApellido2(), clientes.get(i).getDireccion(),
+					clientes.get(i).getLocalidad(), clientes.get(i).getTelefono1(),clientes.get(i).getTelefono1()
+					
+			});
+		}
+	
+		tablaClientes.setModel(dtm);
+}
 
 	private void crearPanelRegistroMascotas() throws Exception{
+		
 		registroMascotas = new JPanel();
 		registroMascotas.setBackground(Color.WHITE);
 		panelPestanas.addTab("Registro de mascotas", null, registroMascotas, null);
@@ -987,8 +996,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		lblFechaBuscada = new JLabel("Fecha de Nacimiento : :");
 		lblFechaBuscada.setBackground(Color.WHITE);
 		lblFechaBuscada.setBounds(58, 594, 562, 14);
-		registroMascotas.add(lblFechaBuscada);
-		
+		registroMascotas.add(lblFechaBuscada);	
 		
 		textFechaBuscada = new JTextField();
 		textFechaBuscada.setColumns(10);
@@ -1002,7 +1010,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		registroMascotas.add(chckbxCastradoBuscado);		
 		
 		btnEditarRegistroMascota = new JButton("EDITAR DATOS");
-		btnEditarRegistroMascota.setBackground(new Color(176, 224, 230));
+		btnEditarRegistroMascota.setBackground(new Color(143, 188, 143));
 		btnEditarRegistroMascota.setBounds(675, 400, 199, 23);
 		registroMascotas.add(btnEditarRegistroMascota);
 		btnEditarRegistroMascota.addActionListener(this);
@@ -1025,38 +1033,13 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		registroMascotas.add(textIdMascota);
 		textIdMascota.setColumns(10);
 		
-		limpiarFormularioRegistroMascotas();
-		crearTablasRegistroMascotas(registroMascotas);
-			
-	}
-	
-	private void crearTablasRegistroMascotas(JPanel registroMascotas) {
+		JScrollPane scrollPaneRegistroMascotas = new JScrollPane();
+		scrollPaneRegistroMascotas.setBounds(58, 119, 1315, 160);
+		registroMascotas.add(scrollPaneRegistroMascotas);
 		
-		limpiarFormularioRegistroMascotas();
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(58, 119, 1315, 160);
-		registroMascotas.add(scrollPane);
-		
-		
-		try {
-			ArrayList<Mascota> mascotas = manager.getRegistroMascotas();
-		
-		
-		String titulos[]= {"ID MASCOTA","DNI PROPIETARIO","NOMBRE","ESPECIE","RAZA","SEXO","FECHA DE NACIMIENTO", "CASTRADO"};
-		String  fila[] []= new String[mascotas.size()] [titulos.length];
-		tablaRegistroMascotas = new JTable(fila, titulos);
-		
-		for(int i=0;i<mascotas.size();i++) {			
-			fila[i][0]= Integer.toString(mascotas.get(i).getId()) ;
-			fila[i][1]= mascotas.get(i).getPropietario();
-			fila[i][2]= mascotas.get(i).getNombre();
-			fila[i][3]= mascotas.get(i).getEspecie();
-			fila[i][4]= mascotas.get(i).getRaza();
-			fila[i][5]= mascotas.get(i).getSexo();
-			fila[i][6]= mascotas.get(i).getFechaNacimiento();
-			fila[i][7]= mascotas.get(i).esCastrado();
-		}
+		tablaRegistroMascotas = new JTable();
+		datosTablasRegistroMascotas();
+		tablaRegistroMascotas.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				
 		tablaRegistroMascotas.addMouseListener(new MouseAdapter() {
 		      public void mouseClicked(MouseEvent e) 
@@ -1083,12 +1066,44 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			         }
 			   }
 		  });
+		
+		scrollPaneRegistroMascotas.setViewportView(tablaRegistroMascotas);
+		
+		limpiarFormularioRegistroMascotas();		
+	}
+	
+	private void datosTablasRegistroMascotas() {
+		
+		ArrayList<Mascota> mascotas = new ArrayList <Mascota>();
+			
+		try {
+			mascotas = manager.getRegistroMascotas();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-		tablaRegistroMascotas.setEnabled(false);
-		scrollPane.setViewportView(tablaRegistroMascotas);
+		String titulos[]= new String[] {"ID MASCOTA","DNI PROPIETARIO","NOMBRE","ESPECIE","RAZA","SEXO","FECHA DE NACIMIENTO", "CASTRADO"};
+		
+		DefaultTableModel dtm = new DefaultTableModel(titulos, 0) {
+			/**
+			 * version serial Para que no se puedan editar las celdas
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		for (int i = 0; i < mascotas.size(); i++) {
+			dtm.addRow(new Object[] { Integer.toString(mascotas.get(i).getId()),mascotas.get(i).getPropietario(), mascotas.get(i).getNombre(),
+					mascotas.get(i).getEspecie(), mascotas.get(i).getRaza(),
+					mascotas.get(i).getSexo(), mascotas.get(i).getFechaNacimiento(),mascotas.get(i).esCastrado()
+
+			});
+		}
+		
+		tablaRegistroMascotas.setModel(dtm);
 	}
 
 	private void limpiarFormularioRegistroMascotas() {
@@ -1125,17 +1140,17 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		personal.add(separator);
 		
 		// datos a rellenar --------------------------------------------------------------------------- 
-		lblDniCliente = new JLabel("DNI del propietario/a :");
-		lblDniCliente.setBounds(565, 88, 513, 14);
-		lblDniCliente.setVisible(blnVisible);
-		personal.add(lblDniCliente);
-		 
-		textaltaDni = new JTextField();
-		textaltaDni.setBackground(Color.WHITE);
-		textaltaDni.setBounds(565, 103, 513, 20);
-		textaltaDni.setVisible(blnVisible);
-		personal.add(textaltaDni);
-		textaltaDni.setColumns(10);
+		lblDniPropietario = new JLabel("DNI del propietario/a :");
+		lblDniPropietario.setBounds(565, 88, 513, 14);
+		lblDniPropietario.setVisible(blnVisible);
+		personal.add(lblDniPropietario);		
+		
+		textaltaDniPropietario = new JTextField();
+		textaltaDniPropietario.setBackground(Color.WHITE);
+		textaltaDniPropietario.setBounds(565, 103, 513, 20);
+		textaltaDniPropietario.setVisible(blnVisible);
+		personal.add(textaltaDniPropietario);
+		textaltaDniPropietario.setColumns(10);
 		 
 		lblNombreAltaMascota = new JLabel("Nombre de la mascota : ");
 		lblNombreAltaMascota.setBounds(565, 137, 513, 14);
@@ -1200,12 +1215,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// botones------------------------------------------------------------------------------
 		btnRegistrarAnimal = new JButton("ACEPTAR");
+		btnRegistrarAnimal.setBackground(new Color(143, 188, 143));
 		btnRegistrarAnimal.setBounds(565, 511, 121, 23);
 		btnRegistrarAnimal.setVisible(blnVisible);
 		personal.add(btnRegistrarAnimal);
 		btnRegistrarAnimal.addActionListener(this);
 		 
 		btnCancelarMascota = new JButton("CANCELAR");
+		btnCancelarMascota.setBackground(new Color(205, 92, 92));
 		btnCancelarMascota.setBounds(957, 511, 121, 23);
 		btnCancelarMascota.setVisible(blnVisible);
 		personal.add(btnCancelarMascota);
@@ -1322,12 +1339,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// botones------------------------------------------------------------------------
 		btnRegistrarCliente = new JButton("ACEPTAR");
+		btnRegistrarCliente.setBackground(new Color(143, 188, 143));
 		btnRegistrarCliente.setBounds(565, 584, 121, 23);
 		btnRegistrarCliente.setVisible(blnVisible);
 		personal.add(btnRegistrarCliente);
 		btnRegistrarCliente.addActionListener(this);
 		 
 		btnCrearUsuario = new JButton("GENERAR USUARIO");
+		btnCrearUsuario.setBackground(new Color(176, 224, 230));
 		btnCrearUsuario.setBounds(736, 584, 179, 23);
 		btnCrearUsuario.setVisible(blnVisible);
 		btnCrearUsuario.setEnabled(false);  // hasta que no registre al cliente no se activa la posibilidad de crear usuario
@@ -1335,12 +1354,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		btnCrearUsuario.addActionListener(this);
 		 
 		btnCancelarCliente = new JButton("CANCELAR");
+		btnCancelarCliente.setBackground(new Color(205, 92, 92));
 		btnCancelarCliente.setBounds(957, 584, 121, 23);
 		btnCancelarCliente.setVisible(blnVisible);
 		personal.add(btnCancelarCliente);
 		btnCancelarCliente.addActionListener(this);
 		
 		btnRegistraMascota = new JButton(" DAR DE ALTA UNA MASCOTA ");
+		btnRegistraMascota.setBackground(new Color(176, 224, 230));
 		btnRegistraMascota.setBounds(565, 637, 513, 23);
 		btnRegistraMascota.setVisible(blnVisible);
 		btnRegistraMascota.setEnabled(false); // hasta que no registre al cliente no se activa la posibilidad de registrar una mascota
@@ -1516,7 +1537,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			nuevaM.setEspecie(textEspecieMascota.getText().trim());
 			nuevaM.setRaza(textRazaMascota.getText());
 			nuevaM.setFechaNacimiento(textFechaNaciMascota.getText().trim());
-			//System.out.println(nuevaM.getFechaNacimiento());
 			nuevaM.setSexo(textSexoMascota.getText().trim());
 			boolean blnCastrado;
 			
@@ -1528,10 +1548,9 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}
 
 			nuevaM.setBlnCastrado(blnCastrado);
-			
-			
-			
+				
 			manager.guardarDatosMascota(nuevaM);
+			datosTablasRegistroMascotas();			
 			
 		}catch (Exception e1) {
 			System.out.println(e1.getMessage());
@@ -1551,7 +1570,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		textAltaLocal.setText("");
 		
 		//no permitimos que le de al botón de crear usuario
-		btnCrearUsuario.setEnabled(false);
+		//btnCrearUsuario.setEnabled(false);
 	}
 	
 	// método que limpia el formulario de la pestaña de registro de clientes 
@@ -1619,6 +1638,9 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			
 			manager.guardarDatos(nuevoC);
 		
+			datosTablaClientes();
+			
+		
 		}
 		catch (Exception e1) {
 			e1.getMessage();
@@ -1648,8 +1670,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		activarTextAreaMascota(true);
 		// datos a rellenar ----------------------------------------
-		lblDniCliente.setVisible(blnVisible);
-		textaltaDni.setVisible(blnVisible);
+		lblDniPropietario.setVisible(blnVisible);
+		textaltaDniPropietario.setVisible(blnVisible);
 		lblNombreAltaMascota.setVisible(blnVisible);
 		textAltaNombreMascota.setVisible(blnVisible);
 		lblEspecieMascota.setVisible(blnVisible);
@@ -1669,7 +1691,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		
 		// cambiamos color de fondo del textArea---------------------
-		textaltaDni.setBackground(new Color(245,255,250));
+		textaltaDniPropietario.setBackground(new Color(245,255,250));
 		textAltaNombreMascota.setBackground(new Color(245,255,250));
 		textEspecieMascota.setBackground(new Color(245,255,250));
 		textRazaMascota.setBackground(new Color(245,255,250));
@@ -2094,6 +2116,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			
 		//buttons área personal usuario--------------------------------------------------------------------------------------------------
 		
+		// botón que permite editar algunos datos
 		if(e.getSource().equals(btnEditar)) {
 			mostrarMascota(false);
 			mostrarDatosEditar(true);
@@ -2101,6 +2124,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		//----butons editar-----------------------------------------------------------------------------------------
 		
+		// botón que guarda los cambios realizados
 		if(e.getSource().equals(btnAceptarCambios)) {
 			
 			if(comprobarCambios()) {
@@ -2132,7 +2156,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			btnMascotas.setVisible(true);
 		}
 		
-		
+		// botón que recupera los cambios realizados
 		if(e.getSource().equals(btnCancelarCambios)) {
 			
 			String mensaje = "¿Quieres cancelar los cambios?";
@@ -2147,10 +2171,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}		
 		}
 		
+		//botón que muestra las mascotas del cliente
 		if(e.getSource().equals(btnMascotas)) {
 			mostrarMascota(true);
 		}
 		
+		// botón de cierre de sesión
 		if(e.getSource().equals(btnCerrarSesionCliente)) {
 			
 			String mensaje = "¿Quieres cerrar la sesión?";
@@ -2162,6 +2188,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		//buttons pestaña citas------------------------------------------------------------------------------------------------------
 		
+		// botón para ver los datos de la petición de cita
 		if(e.getSource().equals(btnVerDatos)) {
 			String nombre = (String)listaMascotas.getSelectedItem();
 			String dni = obtenerDni();
@@ -2184,7 +2211,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 						 		+"Veterinario asignado: "+ veterinario.getNombre()+" "+veterinario.getApellido1()+" "+veterinario.getApellido2()+"\n"
 						 		+"\nEspecialidad: "+veterinario.getEspecialidad();
 				 
-				 System.out.println(datos);
 				 textDatosCita.setText(datos);
 				
 			}
@@ -2192,6 +2218,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		
+		// botón para guardar los datos de la cita
 		if(e.getSource().equals(btnValidarCita)) {
 			String mensaje = "¿Quieres validar la cita?";
 			int opc = JOptionPane.showConfirmDialog(this, mensaje, "AVISO", JOptionPane.YES_NO_OPTION);
@@ -2214,6 +2242,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}	
 		}
 		
+		// limpia el contenido del Text Area
 		if(e.getSource().equals(btnBorrarDatosCita)) {
 			
 			textDatosCita.setText("");
@@ -2222,29 +2251,33 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// buttons pestaña personal--------------------------------------------------------------------------------------------------------------------------
 		
+		// activa los componentes del alta de clientes
 		if(e.getSource().equals(btnAltaClientes)) {
+			mostrarAltacliente(true);
 			mostrarDatosCitas(false);
 			mostrarAltaMascota(false);
-			mostrarAltacliente(true);
+			
 			limpiarFormularioCliente();
 			activarTextArea(true);
 		}
-			
+		
+		// activa los componentes del alta de mascotas
 		if(e.getSource().equals(btnAltaMascotas)) {
-			mostrarDatosCitas(false);
-			mostrarAltacliente(false);
+			textaltaDniPropietario.setText("");
+			textaltaDniPropietario.setEditable(true);	
 			mostrarAltaMascota(true);
-			textaltaDni.setText("");
-			textaltaDni.setEditable(true);		
+			mostrarDatosCitas(false);
+			mostrarAltacliente(false);				
 		}
 		
+		// activa los componentes de las citas
 		if(e.getSource().equals(btnRellenarCita)) {
 			mostrarAltaMascota(false);
 			mostrarAltacliente(false);
-			mostrarDatosCitas(true);
 			crearTablaCitas(personal, true);
 		}
-			
+		
+		// cierre de sesión
 		if(e.getSource().equals(btnCerrarSesionPersonal)) {
 			
 				String mensaje = "¿Quieres cerrar la sesión?";
@@ -2255,6 +2288,8 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		}
 		
 		// buttons rellenar citas------------------------------------------------------------------------------------------------------------------------------
+		
+		// guarda las anotaciones realizadas
 		if(e.getSource().equals(btnAnotaciones)) {
 			String descripcion = textField.getText();
 			String codigo = textCodigo.getText();
@@ -2264,7 +2299,9 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			
 			if(opc == JOptionPane.YES_OPTION) {
 				try {
-					manager.updateAnotacion(codigo, descripcion);		
+					manager.updateAnotacion(codigo, descripcion);
+					crearTablaCitas(personal, true);
+					JOptionPane.showMessageDialog(this, "Anotación guardada correctamente", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
 				}
 				catch(Exception e1) {
 					String aviso = "¡Error al guardar la anotación!";
@@ -2273,12 +2310,15 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}
 			
 		}
+		
+		// limpia el text Area con las anotaciones
 		if(e.getSource().equals(btnBorrarAnotacion)) {
 			textField.setText("");
 		}
 		
 		//butons alta de cliente-------------------------------------------------------------------------------------------------------------------------------
 		
+		// botón para registrar a un nuevo cliente
 		if(e.getSource().equals(btnRegistrarCliente)) {
 			
 			//comprobamos que todos los campos estén completos
@@ -2294,14 +2334,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				btnCrearUsuario.setEnabled(true);
 				btnRegistrarCliente.setEnabled(false);
 				btnRegistraMascota.setEnabled(true);
-				btnCancelarCliente.setEnabled(false);
+				btnCancelarCliente.setEnabled(false);	
 			}
-			else {
-				String mensaje = "¡Debes rellenar todos los campos!";
-				JOptionPane.showMessageDialog(this, mensaje, "AVISO", JOptionPane.WARNING_MESSAGE);
-			}	
+
 		}
 		
+		//botón para limpiar el formulario
 		if(e.getSource().equals(btnCancelarCliente)) {
 			
 			String mensaje = "¿Quieres cancelar el registro?";
@@ -2313,35 +2351,37 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}
 		}
 		
+		// botón para crear clave de usuario
 		if(e.getSource().equals(btnCrearUsuario)) {
 			String clave = crearClaveUsuario();
 			String mensaje = "Usuario: "+textaltaDni.getText()+
 					"\n	"+"Clave: "+clave;
 			JOptionPane.showMessageDialog(this, mensaje, "DATOS", JOptionPane.INFORMATION_MESSAGE);	
-			
-			crearTablaRegistroClientes(registro);
+
 			btnCrearUsuario.setEnabled(false);
 		}
 		
+		// boton que se activa para registra una mascota tras dar de alta al cliente 
 		if(e.getSource().equals(btnRegistraMascota)) {
 			mostrarDatosCitas(false);
 			mostrarAltacliente(false);
 			mostrarAltaMascota(true);
 			
 			btnRegistrarAnimal.setEnabled(true);
-			textaltaDni.setText(textaltaDni.getText());
-			textaltaDni.setEditable(false);
+			textaltaDniPropietario.setText(textaltaDni.getText());
+			textaltaDniPropietario.setEditable(false);
 			activarTextAreaMascota(true);
 			
 		}
 		
 		// buttons alta de mascota------------------------------------------------------------------------------------------------------------------------------
 		
+		// botón para registrar la nueva mascota
 		if(e.getSource().equals(btnRegistrarAnimal)) {
 			
 			//comprobamos que todos los campos estén completos
 			if(comprobarCamposMascota()) {
-				recogerDatosMascota(textaltaDni.getText());
+				recogerDatosMascota(textaltaDniPropietario.getText());
 				
 				//desactivamos campos para que no haga modificaciones posteriores al alta
 				activarTextAreaMascota(false);
@@ -2353,7 +2393,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				
 				//desactivamos botón de registro de mascota
 				btnRegistrarAnimal.setEnabled(false);
-				crearTablasRegistroMascotas(registroMascotas);
+				
 			}
 			
 			else {
@@ -2362,6 +2402,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			}	
 		}
 		
+		// limpia formulario del alta de mascota
 		if(e.getSource().equals(btnCancelarMascota)) {
 			
 			String mensaje = "¿Quieres cancelar el registro?";
@@ -2376,6 +2417,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// buttons paneles de registro---------------------------------------------------------------------------------------------------------------------------------
 		
+		// botón para realizar la búsqueda de cliente
 		if(e.getSource().equals(btnBuscar)) {
 			
 			String dniBuscado = textDniBuscar.getText();
@@ -2407,6 +2449,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			
 		}
 		
+		// botón para eliminar un cliente
 		if(e.getSource().equals(btnEliminarCliente)) {
 			
 			String dni = textDniBuscar.getText();
@@ -2419,10 +2462,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				if(opc == JOptionPane.YES_OPTION) {
 					
 					manager.borrarCliente(dni);
+					
 					String info ="Cliente eliminado correctamente";
 					JOptionPane.showMessageDialog(this, info, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-					crearTablasRegistroMascotas(registroMascotas);
-					crearTablaRegistroClientes(registro);
+					limpiarFormularioRegistro();
+					datosTablasRegistroMascotas();
+					datosTablaClientes();
 					
 				}
 						
@@ -2432,21 +2477,31 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			
 			
 		}
+		
+		// botón para realizar la búsqueda de mascota
 		if(e.getSource().equals(btnBuscarMascota)) {
 			String dniPropietario = textDniBuscar.getText();
 			String nombre = textNombreMascotaB.getText();
 			
 			try {
 				Mascota mascotaBuscada = manager.getMascota(dniPropietario, nombre);
-				if(mascotaBuscada.isBlnCastrado()) {
-					chckbxCastradoBuscado.setSelected(true);
-					chckbxCastradoBuscado.setEnabled(false);
+				if(mascotaBuscada!=null) {
+					if(mascotaBuscada.isBlnCastrado()) {
+						chckbxCastradoBuscado.setSelected(true);
+						chckbxCastradoBuscado.setEnabled(false);
+					}
+				}
+				else {
+					String mensaje = "No se ha encontrado ninguna mascota con esos datos";
+					JOptionPane.showMessageDialog(this, mensaje, "AVISO", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
+		
+		// botón que guarda los datos editados
 		if(e.getSource().equals(btnEditarRegistroMascota)){
 			
 			String mensaje = "¿Quieres guardar los cambios?";
@@ -2457,7 +2512,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				try {
 					Mascota m = guardarDatosMascota();
 					manager.editarDatosMascota(m);
-					crearTablasRegistroMascotas(registroMascotas);
+					datosTablasRegistroMascotas();
 					String info ="Nuevos datos guardados correctamente";
 					JOptionPane.showMessageDialog(this, info, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
 				}catch(Exception e1) {
@@ -2465,9 +2520,11 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				}
 			}
 		}
+		
+		// botón que elimina una mascota
 		if(e.getSource().equals(btnEliminarMascota)) {
 			
-			String dniPropietario = textDniBuscar.getText();
+			String id = textIdMascota.getText();
 			String nombre = textNombreMascotaB.getText();
 			
 			try {
@@ -2477,8 +2534,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 				
 				if(opc == JOptionPane.YES_OPTION) {
 			
-					manager.borrarMascota(dniPropietario, nombre);
-					crearTablasRegistroMascotas(registroMascotas);
+					manager.borrarMascota(id, nombre);
+					String info ="Mascota eliminada correctamente";
+					JOptionPane.showMessageDialog(this, info, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+					datosTablasRegistroMascotas();
+					limpiarFormularioRegistroMascotas();
+					
 				}
 			}catch(Exception e1) {
 				e1.printStackTrace();
