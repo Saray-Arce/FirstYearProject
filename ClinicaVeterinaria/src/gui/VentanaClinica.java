@@ -22,10 +22,6 @@ import java.awt.event.MouseEvent;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -392,6 +388,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		
 	}
+	
 	private void crearTablaCitas(JPanel personal, boolean blnVisible) {
 		
 		
@@ -856,7 +853,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			fila[i][4]= clientes.get(i).getDireccion();
 			fila[i][5]= clientes.get(i).getLocalidad();
 			fila[i][6]= clientes.get(i).getTelefono1();
-			fila[i][7]= clientes.get(i).getTelefono2();
+			if(clientes.get(i).getTelefono2() != null) {
+				fila[i][7]= clientes.get(i).getTelefono2();
+			}
+			else {
+				fila[i][7]= "";
+			}
 		}
 		
 		
@@ -877,12 +879,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			        	textDireccBuscada.setText(tablaClientes.getValueAt(filaSeleccionada, 4).toString());
 			        	textLocalidadBuscada.setText(tablaClientes.getValueAt(filaSeleccionada, 5).toString());
 				 		textTelfBusc1.setText(tablaClientes.getValueAt(filaSeleccionada, 6).toString());
-				 		if(tablaClientes.getValueAt(filaSeleccionada, 6).toString() == null)  {
-				 			textTelfBusc2.setText("");
-				 		}else {
-				 			textTelfBusc2.setText(tablaClientes.getValueAt(filaSeleccionada, 7).toString());
-				 		}
-				 		
+				 		textTelfBusc2.setText(tablaClientes.getValueAt(filaSeleccionada, 7).toString());
 			         }
 			   }
 		  });
@@ -1318,6 +1315,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	}
 
 	private void limpiarFormularioMascota() {
+		textaltaDni.setText("");
 		textAltaNombreMascota.setText("");
 		textEspecieMascota.setText("");
 		textRazaMascota.setText("");
@@ -1470,12 +1468,12 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	}
 
 	//método que recoge el contenido del textArea del alta de mascota	
-	private void recogerDatosMascota(String text) {
+	private void recogerDatosMascota(String dniPropietario) {
 		Mascota nuevaM = new Mascota();
 		
 		try {
 			
-			nuevaM.setPropietario(textaltaDni.getText());
+			nuevaM.setPropietario(dniPropietario);
 			nuevaM.setNombre(textAltaNombreMascota.getText().trim());
 			nuevaM.setEspecie(textEspecieMascota.getText().trim());
 			nuevaM.setRaza(textRazaMascota.getText());
@@ -2189,6 +2187,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		if(e.getSource().equals(btnAltaClientes)) {
 			mostrarAltaMascota(false);
 			mostrarAltacliente(true);
+			limpiarFormularioCliente();
 			activarTextArea(true);
 		}
 			
