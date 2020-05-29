@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -29,6 +31,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -63,6 +66,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JTextField textApellUser2;
 	private JTextField textLocalidad;
 	private JTextField textTelefUser2;
+	
 	private JButton btnEditar;
 	private JButton btnMascotas;
 	private JButton btnCerrarSesionCliente;
@@ -98,6 +102,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JButton btnCerrarSesionPersonal;
 	private JSeparator separator;
 	
+	//----------------alta de cliente-------------
 	private JLabel lblDniCliente;
 	private JTextField textaltaDni;
 	private JLabel lblNombreCliente;
@@ -120,6 +125,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JButton btnCancelarCliente;
 	private JButton btnRegistraMascota;
 	
+	//----------------alta de mascota-------------
 	private JLabel lblDatosRegistroMascota;
 	private JLabel lblDniPropietario;
 	private JTextField textaltaDniPropietario;
@@ -136,6 +142,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	private JCheckBox chckbxEsterilizadoAlta;
 	private JButton btnRegistrarAnimal;
 	private JButton btnCancelarMascota;
+	
 	//-----panel registro clientes---------------
 	private JPanel registro;
 	private JTable tablaClientes;
@@ -223,8 +230,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 			break;
 		}
 		
-	
-		 
 	}
 
 	//------------MÉTODOS PARA CREAR LOS PANELES--------------------------------------------------------------------------------------------------//
@@ -318,12 +323,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 btnAltaClientes.addActionListener(this);
 		   
 		 btnCerrarSesionPersonal = new JButton("CERRAR SESI\u00D3N");
+		 btnCerrarSesionPersonal.setForeground(Color.WHITE);
 		 btnCerrarSesionPersonal.setBackground(new Color(205, 92, 92));
 		 btnCerrarSesionPersonal.setBounds(23, 641, 225, 44);
 		 personal.add(btnCerrarSesionPersonal);
 		 btnCerrarSesionPersonal.addActionListener(this);
 		 
 		 btnRellenarCita = new JButton("RELLENAR CITA");
+		 btnRellenarCita.setForeground(Color.BLACK);
 		 btnRellenarCita.setBackground(new Color(176, 224, 230));
 		 btnRellenarCita.setBounds(23, 563, 225, 44);
 		 personal.add(btnRellenarCita);
@@ -356,11 +363,15 @@ public class VentanaClinica extends JDialog implements ActionListener{
 					 
 		textField = new JTextField();
 		textField.setBounds(357, 429, 1012, 73);
+		Border border = BorderFactory.createLineBorder(new Color(176, 224, 230));
+		textField.setBorder(BorderFactory.createCompoundBorder(border, 
+	               BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		personal.add(textField);
 		textField.setColumns(10);
 		textField.setVisible(false);
 				 
 		btnAnotaciones = new JButton("GUARDAR ANOTACIONES");
+		btnAnotaciones.setForeground(Color.WHITE);
 		btnAnotaciones.setBackground(new Color(143, 188, 143));
 		btnAnotaciones.setBounds(357, 563, 330, 23);
 		personal.add(btnAnotaciones);
@@ -368,6 +379,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		btnAnotaciones.addActionListener(this);
 			
 		btnBorrarAnotacion = new JButton("BORRAR ANOTACIONES");
+		btnBorrarAnotacion.setForeground(Color.WHITE);
 		btnBorrarAnotacion.setBackground(new Color(205, 92, 92));
 		btnBorrarAnotacion.setBounds(1039, 563, 330, 23);
 		personal.add(btnBorrarAnotacion);
@@ -576,6 +588,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 btnMascotas.addActionListener(this);
 		   
 		 btnCerrarSesionCliente = new JButton("CERRAR SESI\u00D3N");
+		 btnCerrarSesionCliente.setForeground(Color.WHITE);
 		 btnCerrarSesionCliente.setBackground(new Color(205, 92, 92));
 		 btnCerrarSesionCliente.setBounds(23, 585, 225, 44);
 		 ficha.add(btnCerrarSesionCliente);
@@ -704,15 +717,20 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		 
 		 textDatosCita = new JTextPane();
 		 textDatosCita.setBounds(815, 74, 563, 213);
+		 Border border = BorderFactory.createLineBorder(new Color(176, 224, 230));
+		 textDatosCita.setBorder(BorderFactory.createCompoundBorder(border, 
+	               BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		 Cita.add(textDatosCita);
 		 
 		 btnValidarCita = new JButton("Validar");
+		 btnValidarCita.setForeground(Color.WHITE);
 		 btnValidarCita.setBackground(new Color(143, 188, 143));
 		 btnValidarCita.setBounds(1039, 298, 113, 35);
 		 Cita.add(btnValidarCita);
 		 btnValidarCita.addActionListener(this);
 		 
 		 btnBorrarDatosCita = new JButton("Borrar datos");
+		 btnBorrarDatosCita.setForeground(Color.WHITE);
 		 btnBorrarDatosCita.setBackground(new Color(205, 92, 92));
 		 btnBorrarDatosCita.setBounds(1265, 298, 113, 35);
 		 Cita.add(btnBorrarDatosCita);
@@ -759,6 +777,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		registro.add(lblResultado);
 		
 		btnEliminarCliente = new JButton("ELIMINAR CLIENTE");
+		btnEliminarCliente.setForeground(Color.WHITE);
 		btnEliminarCliente.setBackground(new Color(205, 92, 92));
 		btnEliminarCliente.setBounds(693, 400, 199, 23);
 		btnEliminarCliente.addActionListener(this);
@@ -864,6 +883,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 	}
 	
+	// método que carga los datos de la tabla del registro de clientes
 	private void datosTablaClientes() {
 		
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -1010,12 +1030,14 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		registroMascotas.add(chckbxCastradoBuscado);		
 		
 		btnEditarRegistroMascota = new JButton("EDITAR DATOS");
+		btnEditarRegistroMascota.setForeground(Color.WHITE);
 		btnEditarRegistroMascota.setBackground(new Color(143, 188, 143));
 		btnEditarRegistroMascota.setBounds(675, 400, 199, 23);
 		registroMascotas.add(btnEditarRegistroMascota);
 		btnEditarRegistroMascota.addActionListener(this);
 		
 		btnEliminarMascota = new JButton("ELIMINAR MASCOTA");
+		btnEliminarMascota.setForeground(Color.WHITE);
 		btnEliminarMascota.setBackground(new Color(205, 92, 92));
 		btnEliminarMascota.setBounds(675, 455, 199, 23);
 		registroMascotas.add(btnEliminarMascota);
@@ -1072,6 +1094,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		limpiarFormularioRegistroMascotas();		
 	}
 	
+	// método que carga los datos de la tabla del registro de mascotas
 	private void datosTablasRegistroMascotas() {
 		
 		ArrayList<Mascota> mascotas = new ArrayList <Mascota>();
@@ -1215,6 +1238,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// botones------------------------------------------------------------------------------
 		btnRegistrarAnimal = new JButton("ACEPTAR");
+		btnRegistrarAnimal.setForeground(Color.WHITE);
 		btnRegistrarAnimal.setBackground(new Color(143, 188, 143));
 		btnRegistrarAnimal.setBounds(565, 511, 121, 23);
 		btnRegistrarAnimal.setVisible(blnVisible);
@@ -1222,6 +1246,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		btnRegistrarAnimal.addActionListener(this);
 		 
 		btnCancelarMascota = new JButton("CANCELAR");
+		btnCancelarMascota.setForeground(Color.WHITE);
 		btnCancelarMascota.setBackground(new Color(205, 92, 92));
 		btnCancelarMascota.setBounds(957, 511, 121, 23);
 		btnCancelarMascota.setVisible(blnVisible);
@@ -1339,6 +1364,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		
 		// botones------------------------------------------------------------------------
 		btnRegistrarCliente = new JButton("ACEPTAR");
+		btnRegistrarCliente.setForeground(Color.WHITE);
 		btnRegistrarCliente.setBackground(new Color(143, 188, 143));
 		btnRegistrarCliente.setBounds(565, 584, 121, 23);
 		btnRegistrarCliente.setVisible(blnVisible);
@@ -1354,6 +1380,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		btnCrearUsuario.addActionListener(this);
 		 
 		btnCancelarCliente = new JButton("CANCELAR");
+		btnCancelarCliente.setForeground(Color.WHITE);
 		btnCancelarCliente.setBackground(new Color(205, 92, 92));
 		btnCancelarCliente.setBounds(957, 584, 121, 23);
 		btnCancelarCliente.setVisible(blnVisible);
@@ -1371,6 +1398,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		limpiarFormularioCliente();
 	}
 
+	// método que limpia el formulario de la mascota
 	private void limpiarFormularioMascota() {
 	//	textaltaDni.setText("");
 		textAltaNombreMascota.setText("");
@@ -1757,6 +1785,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		return m;
 	}
 	
+	// método que muestra los componenes de las citas
 	private void mostrarDatosCitas(boolean blnVisible) {
 		lblAnotaciones.setVisible(blnVisible);
 		textField.setVisible(blnVisible);
@@ -2060,8 +2089,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		return cambiado;
 	}
 	
-	// método que recoge los datos de la cita
-	
 	// método para guardar los datos de la cita solicitada
 	private Cita guardarDatosCita() {
 		String nombre = (String)listaMascotas.getSelectedItem();
@@ -2101,8 +2128,6 @@ public class VentanaClinica extends JDialog implements ActionListener{
 	}
 
 	// método para obtener el DNI del usuario
-	
-	// método que devuelve el dni del usuario para poder solicitar la cita
 	private String obtenerDni() {
 		
 		return textDniUser.getText();
