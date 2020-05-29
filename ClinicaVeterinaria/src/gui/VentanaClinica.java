@@ -1208,7 +1208,7 @@ public class VentanaClinica extends JDialog implements ActionListener{
 		personal.add(textRazaMascota);
 		textRazaMascota.setColumns(10);
 		
-		lblFechaNacimiento = new JLabel("Fecha de nacimiento (yyyy-mm-dd) :");
+		lblFechaNacimiento = new JLabel("Fecha de nacimiento (aaaa-mm-dd) :");
 		lblFechaNacimiento.setBounds(565, 313, 513, 14);
 		lblFechaNacimiento.setVisible(blnVisible);
 		personal.add(lblFechaNacimiento);

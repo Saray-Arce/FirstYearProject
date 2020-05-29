@@ -103,20 +103,17 @@ public class Login extends JFrame implements ActionListener{
 			String clave = new String (textPasswd.getPassword()).trim();
 			try {
 				Usuario usuario = manager.getUsuario(wUsuario, clave);
-				if(usuario.getUsuario().equalsIgnoreCase(wUsuario) && usuario.getPassword().equalsIgnoreCase(clave)) {
+				
+				 if(usuario.getUsuario().equalsIgnoreCase(wUsuario) && usuario.getPassword().equalsIgnoreCase(clave)) {
 					
 					VentanaClinica clinica = new VentanaClinica(this, wUsuario, usuario.getTipo());
 					clinica.setVisible(true);
 				}
-				else {
-					String mensaje = "Usuario o contraseña incorrectos";
-					JOptionPane.showMessageDialog(this, mensaje,"ERROR", JOptionPane.ERROR_MESSAGE);
-				}
+				
 				
 			} catch (Exception e1) {
-				String mensaje = "Ha ocurrido un error en la conexión";
-				JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-				System.out.println(e1.getMessage());
+				String mensaje = "Usuario o contraseña incorrectos";
+				JOptionPane.showMessageDialog(this, mensaje,"ERROR", JOptionPane.ERROR_MESSAGE);
 
 			}
 			
